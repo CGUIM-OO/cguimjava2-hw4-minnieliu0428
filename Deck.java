@@ -3,13 +3,20 @@ import java.util.Random;
 
 public class Deck {
 
-	private ArrayList<Card> cards;
-	private ArrayList<Card> usedCards;
+	private ArrayList<Card> cards;      //所有的牌
+	private ArrayList<Card> usedCards;  //所有發出去的牌
+	private ArrayList<Card> openCards;  //所有打開的牌
 	public int nUsed;
 
+	/**
+	 * 建立牌組
+	 * @param nDeck 產生幾副排
+	 * @return
+	 */
 	public Deck(int nDeck){
 		cards=new ArrayList<Card>();
 		usedCards=new ArrayList<Card>();
+		openCards=new ArrayList<Card>();
 		
 		//產生幾副牌
 		for(int i = 0; i < nDeck ;i++) 
@@ -29,6 +36,8 @@ public class Deck {
 		shuffle();
 	}	
 	
+
+	//洗牌
 	public void shuffle() {
 		
 		//如果有發過牌的話
@@ -41,6 +50,7 @@ public class Deck {
 			}
 			
 			//將紀錄清空
+			openCards.clear();
 			usedCards.clear();
 			nUsed = 0;
 		}
@@ -57,12 +67,23 @@ public class Deck {
 		}
 	}
 	
-	public Card getOneCard(){
+	/**
+	 * 發牌	
+	 * @param isOpened 是否要開牌 (開牌：true, 蓋牌:false)
+	 * @return c 一張牌
+	 */
+	public Card getOneCard(boolean isOpened){
 		
 		//取arrayList裡的第一張牌
 		Card c = cards.get(0);
 		
-		//紀錄至usedCard和nUsed
+		//如果決定開牌的話紀錄
+		if(isOpened != true)
+		{
+			openCards.add(c);
+		}
+		
+		//紀錄至發過的牌及數量
 		usedCards.add(c);
 		nUsed++;
 		
@@ -90,5 +111,9 @@ public class Deck {
 	public ArrayList<Card> getAllCards(){
 		return cards;
 	}	
+	
+	public ArrayList getOpenedCard(){
+		return openCards;
+	}
 }
 
