@@ -70,7 +70,13 @@ public class Player {
 		//回傳此牌局所得的卡點數加總
 		for(Card c : oneRoundCard) 
 		{
-			counter += c.getRank();
+			if(c.getRank()<10) 
+			{
+				counter += c.getRank();
+			}
+			else {
+				counter += 10;
+			}
 		}
 		return counter;
 	}
