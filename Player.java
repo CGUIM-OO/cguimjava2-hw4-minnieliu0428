@@ -29,7 +29,7 @@ public class Player {
 		//檢查是否還有錢
 		if(chips != 0) 
 		{
-			bet = 10;
+			bet = bet;
 		}
 		else {
 			bet = 0;
@@ -88,7 +88,7 @@ public class Player {
 	
 	public void increaseChips (int diff) {
 		//玩家籌碼變動，setter
-		bet = bet + diff;
+		bet = diff;
 	}
 	
 	public void sayHello() {
